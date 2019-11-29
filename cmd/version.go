@@ -16,7 +16,7 @@ var versionCmd = &cobra.Command{
 	Short:	"Print the version number of gocli-sandbox",
 	Long:	`All Software has versions, This is GoCLI-sandbox`,
 	Run:	func(cmd *cobra.Command, args []string) {
-		cyan := color.New(color.FgCyan).Add(color.Underline)
+		cyan := color.New(color.FgCyan).SprintFunc()
 		fmt.Println(cyan("GoCLI-sandbox CLI Study Sample v0.1 -- HEAD"))
 	},
 }
