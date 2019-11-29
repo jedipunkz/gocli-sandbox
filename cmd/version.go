@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/fatih/color"
 )
 
 func init() {
@@ -15,6 +16,7 @@ var versionCmd = &cobra.Command{
 	Short:	"Print the version number of gocli-sandbox",
 	Long:	`All Software has versions, This is GoCLI-sandbox`,
 	Run:	func(cmd *cobra.Command, args []string) {
-		fmt.Println("GoCLI-sandbox CLI Study Sample v0.1 -- HEAD")
+		cyan := color.New(color.FgCyan).Add(color.Underline)
+		fmt.Println(cyan("GoCLI-sandbox CLI Study Sample v0.1 -- HEAD"))
 	},
 }
