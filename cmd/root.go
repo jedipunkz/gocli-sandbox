@@ -1,3 +1,5 @@
+package cmd
+
 var rootCmd = &cobra.Command{
   Use:   "GoCLI-sandbox",
   Short: "GO CLI Study",
