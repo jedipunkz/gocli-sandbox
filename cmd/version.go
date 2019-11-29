@@ -8,7 +8,6 @@ import (
 )
 
 func init() {
-	viper.SetDefault("TestVar", "foo")
 	rootCmd.AddCommand(versionCmd)
 }
 
