@@ -9,25 +9,34 @@ import (
 )
 
 func init() {
-	viper.SetDefault("TestVar", "foo")
-	rootCmd.AddCommand(versionCmd)
+	viper.SetConfigName(".gocli-sandbox")
+	viper.AddConfigPath("$HOME")
+
+	viper.SetDefault("author", "foo")
+	viper.SetDefault("title", "foo")
+
+	rootCmd.AddCommand(configCmd)
 }
 
-var versionCmd = &cobra.Command{
-	Use:	"version",
-	Short:	"Print the version number of gocli-sandbox",
-	Long:	`All Software has versions, This is GoCLI-sandbox`,
+var configCmd = &cobra.Command{
+	Use:	"config",
+	Short:	"Read Config file",
+	Long:	`Read config file named $HOME/.gocli-sandbox.yaml and Output values`,
 	Run:	func(cmd *cobra.Command, args []string) {
 		cyan := color.New(color.FgCyan).SprintFunc()
+		red := color.New(color.FgRed).SprintFunc()
+
 		author, _ := cmd.Flags().GetString("author")
-		viper.SetConfigName(".gocli-sandbox")
-		viper.AddConfigPath("$HOME")
+		title, _ := cmd.Flags().GetString("title")
+
 		if err := viper.ReadInConfig(); err != nil {
 			panic(fmt.Errorf("Fatal errror config file %s \n", err))
 		}
 
 		author = viper.GetString("author")
+		title = viper.GetString("title")
 
-		fmt.Println(cyan("GoCLI-sandbox CLI Study Sample v0.1 -- HEAD" + " " + author))
+		fmt.Println(cyan("Author: " + author))
+		fmt.Println(red("Title: " + title))
 	},
 }
