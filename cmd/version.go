@@ -20,11 +20,9 @@ var versionCmd = &cobra.Command{
 	Run:	func(cmd *cobra.Command, args []string) {
 		cyan := color.New(color.FgCyan).SprintFunc()
 		author, _ := cmd.Flags().GetString("author")
-		v := viper.New()
-		v.SetConfigName(".gocli-sandbox")
-		v.AddConfigPath("$HOME")
-		err = v.ReadInConfig()
-		if err != nil {
+		viper.SetConfigName(".gocli-sandbox")
+		viper.AddConfigPath("$HOME")
+		if err := viper.ReadInConfig(); err != nil {
 			panic(fmt.Errorf("Fatal errror config file %s \n", err))
 		}
 
