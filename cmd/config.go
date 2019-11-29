@@ -3,9 +3,9 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/fatih/color"
 )
 
 func init() {
@@ -19,10 +19,10 @@ func init() {
 }
 
 var configCmd = &cobra.Command{
-	Use:	"config",
-	Short:	"Read Config file",
-	Long:	`Read config file named $HOME/.gocli-sandbox.yaml and Output values`,
-	Run:	func(cmd *cobra.Command, args []string) {
+	Use:   "config",
+	Short: "Read Config file",
+	Long:  `Read config file named $HOME/.gocli-sandbox.yaml and Output values`,
+	Run: func(cmd *cobra.Command, args []string) {
 		cyan := color.New(color.FgCyan).SprintFunc()
 		red := color.New(color.FgRed).SprintFunc()
 
