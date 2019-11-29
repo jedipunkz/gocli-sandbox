@@ -1,5 +1,12 @@
 package cmd
 
+import (
+    "fmt"
+	"os"
+
+    "github.com/spf13/cobra"
+)
+
 var rootCmd = &cobra.Command{
   Use:   "GoCLI-sandbox",
   Short: "GO CLI Study",
