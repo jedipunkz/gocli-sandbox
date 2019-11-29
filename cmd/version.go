@@ -26,7 +26,7 @@ var versionCmd = &cobra.Command{
 			panic(fmt.Errorf("Fatal errror config file %s \n", err))
 		}
 
-		author = v.GetString("author")
+		author = viper.GetString("author")
 
 		fmt.Println(cyan("GoCLI-sandbox CLI Study Sample v0.1 -- HEAD" + " " + author))
 	},
