@@ -19,6 +19,7 @@ var versionCmd = &cobra.Command{
 	Long:	`All Software has versions, This is GoCLI-sandbox`,
 	Run:	func(cmd *cobra.Command, args []string) {
 		cyan := color.New(color.FgCyan).SprintFunc()
+		author, _ := cmd.Flags().GetString("author")
 		v := viper.New()
 		v.SetConfigName(".gocli-sandbox")
 		v.AddConfigPath("$HOME")
