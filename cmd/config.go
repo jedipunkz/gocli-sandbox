@@ -10,7 +10,7 @@ import (
 
 func init() {
 	viper.SetConfigName(".gocli-sandbox")
-	viper.AddConfigPath("$HOME")
+	viper.AddConfigPath("$HOME/tmp")
 
 	viper.SetDefault("author", "foo")
 	viper.SetDefault("title", "foo")
@@ -26,15 +26,15 @@ var configCmd = &cobra.Command{
 		cyan := color.New(color.FgCyan).SprintFunc()
 		red := color.New(color.FgRed).SprintFunc()
 
-		author, _ := cmd.Flags().GetString("author")
-		title, _ := cmd.Flags().GetString("title")
+		// author, _ := cmd.Flags().GetString("author")
+		// title, _ := cmd.Flags().GetString("title")
 
 		if err := viper.ReadInConfig(); err != nil {
 			panic(fmt.Errorf("Fatal errror config file %s \n", err))
 		}
 
-		author = viper.GetString("author")
-		title = viper.GetString("title")
+		author := viper.GetString("author")
+		title := viper.GetString("title")
 
 		fmt.Println(cyan("Author: " + author))
 		fmt.Println(red("Title: " + title))
