@@ -4,6 +4,7 @@ import (
     "log"
     "os"
 	"strings"
+	"os/exec"
 
     "github.com/nlopes/slack"
 	"github.com/spf13/viper"
@@ -22,29 +23,15 @@ func run(api *slack.Client) int {
 			log.Printf("Start up!")
 
 		case *slack.MessageEvent:
-			if strings.Contains(ev.Text, "Foo") {
-				text := "Foo Fighters!"
-				rtm.SendMessage(rtm.NewOutgoingMessage(text, ev.Channel))
+			if strings.Contains(ev.Text, "terraform") {
+				out, err := exec.Command("terraform", "version").Output()
+				if err != nil {
+					log.Println("Fatal error : %s \n", err)
+				}
+
+				rtm.SendMessage(rtm.NewOutgoingMessage("```" + string(out) + "```", ev.Channel))
 			}
 		}
-
-
-        // select {
-        // case msg := <-rtm.IncomingEvents:
-        //     switch ev := msg.Data.(type) {
-        //     case *slack.HelloEvent:
-        //         log.Print("Hello Event")
-        //
-        //     case *slack.MessageEvent:
-        //         log.Printf("Message: %v\n", ev)
-        //         rtm.SendMessage(rtm.NewOutgoingMessage("Hello world", ev.Channel))
-        //
-        //     case *slack.InvalidAuthEvent:
-        //         log.Print("Invalid credentials")
-        //         return 1
-        //
-        //     }
-        // }
     }
 }
 
