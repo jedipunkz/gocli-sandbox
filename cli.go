@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/fatih/color"
 	"github.com/mitchellh/cli"
 	"github.com/spf13/viper"
-	"github.com/fatih/color"
 	"log"
 	"os"
 )
