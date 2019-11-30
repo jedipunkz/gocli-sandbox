@@ -26,9 +26,6 @@ var configCmd = &cobra.Command{
 		cyan := color.New(color.FgCyan).SprintFunc()
 		red := color.New(color.FgRed).SprintFunc()
 
-		// author, _ := cmd.Flags().GetString("author")
-		// title, _ := cmd.Flags().GetString("title")
-
 		if err := viper.ReadInConfig(); err != nil {
 			panic(fmt.Errorf("Fatal errror config file %s \n", err))
 		}
