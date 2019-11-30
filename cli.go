@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/mitchellh/cli"
 	"github.com/spf13/viper"
+	"github.com/fatih/color"
 	"log"
 	"os"
 )
@@ -43,8 +44,10 @@ func (c *Config) Run(args []string) int {
 	author := viper.GetString("author")
 	title := viper.GetString("title")
 
-	log.Println("Author: " + author)
-	log.Println("Title: " + title)
+	red := color.New(color.FgRed).SprintFunc()
+
+	log.Println(red("Author: " + author))
+	log.Println(red("Title: " + title))
 	return 0
 }
 
