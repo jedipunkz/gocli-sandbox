@@ -1,25 +1,35 @@
 package main
 
 import (
+	"fmt"
 	"github.com/fatih/color"
 	"github.com/mitchellh/cli"
 	"github.com/spf13/viper"
 	"log"
 	"os"
+	"os/exec"
 )
 
-type Foo struct{}
+type Exec struct{}
 
-func (f *Foo) Help() string {
-	return "cli foo"
+func (f *Exec) Help() string {
+	return "exec command"
 }
 
-func (f *Foo) Synopsis() string {
-	return "Print \"Foo\""
+func (f *Exec) Synopsis() string {
+	return "Execution command"
 }
 
-func (f *Foo) Run(args []string) int {
-	log.Println("Foo!")
+func (f *Exec) Run(args []string) int {
+	out, err := exec.Command("ls", "/tmp").Output()
+	if err != nil {
+		log.Println("Fatal error.")
+		return 1
+	}
+
+	cyan := color.New(color.FgCyan).SprintFunc()
+
+	fmt.Printf(cyan(string(out)))
 	return 0
 }
 
@@ -57,8 +67,8 @@ func main() {
 	c.Args = os.Args[1:]
 
 	c.Commands = map[string]cli.CommandFactory{
-		"foo": func() (cli.Command, error) {
-			return &Foo{}, nil
+		"exec": func() (cli.Command, error) {
+			return &Exec{}, nil
 		},
 		"config": func() (cli.Command, error) {
 			return &Config{}, nil
