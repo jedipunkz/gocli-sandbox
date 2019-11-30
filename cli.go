@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
+	"github.com/spf13/viper"
 	"log"
 	"os"
 )
@@ -21,6 +22,32 @@ func (f *Foo) Run(args []string) int {
 	return 0
 }
 
+type Config struct{}
+
+func (c *Config) Help() string {
+	return "read config"
+}
+
+func (c *Config) Synopsis() string {
+	return "Load Config File and Output"
+}
+
+func (c *Config) Run(args []string) int {
+	viper.SetConfigName(".gocli-sandbox")
+	viper.AddConfigPath("$HOME/tmp")
+
+	if err := viper.ReadInConfig(); err != nil {
+		log.Println("Fatal error config file %s\n", err)
+	}
+
+	author := viper.GetString("author")
+	title := viper.GetString("title")
+
+	log.Println("Author: " + author)
+	log.Println("Title: " + title)
+	return 0
+}
+
 func main() {
 	c := cli.NewCLI("cli", "0.0.1")
 
@@ -29,6 +56,9 @@ func main() {
 	c.Commands = map[string]cli.CommandFactory{
 		"foo": func() (cli.Command, error) {
 			return &Foo{}, nil
+		},
+		"config": func() (cli.Command, error) {
+			return &Config{}, nil
 		},
 	}
 
