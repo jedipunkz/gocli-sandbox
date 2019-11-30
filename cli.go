@@ -8,7 +8,7 @@ import (
 
 type Foo struct{}
 
-func (f *Foo)  Help() string {
+func (f *Foo) Help() string {
 	return "cli foo"
 }
 
@@ -39,4 +39,3 @@ func main() {
 
 	os.Exit(exitStatus)
 }
-
