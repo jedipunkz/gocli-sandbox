@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/jedipunkz/gocli-sandbox/cmd"
+	"github.com/jedipunkz/gocli-sandbox/cobra/cmd"
 )
 
 func main() {
